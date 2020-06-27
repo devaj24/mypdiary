@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data" class="form-group">
+        {{form.csrf_token}}
+        <div>
+            {{form.title.label}}
+            {% if form.title.errors %}
+                {{form.title(class="form-control is-invalid", value=page.title)}}
+                {% for error in form.title.errors %}
+                    <div class="invalid-feedback">
+                        <span><small>{{error}}</small></span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {{form.title(class="form-control", value=page.title)}}
+            {% endif %}
+        </div><br>
+        <div>
+            {{form.notes.label}}
+            {% if form.notes.errors %}
+                {{form.notes(class="form-control is-invalid", style="height:300px")}}
+                {% for error in form.notes.errors %}
+                    <div class="invalid-feedback">
+                        <span><small>{{error}}</small></span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {{form.notes(class="form-control", style="height:300px")}}
+            {% endif %}
+        </div><br>
+        <div>
+            {{form.image.label}}
+            {% if form.image.errors %}
+                {{form.image(class="form-control is-invalid")}}
+                {% for error in form.image.errors %}
+                    <div class="invalid-feedback">
+                        <span><small>{{error}}</small></span>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {{form.image(class="form-control")}}
+            {% endif %}
+        </div><br>
+        <div>
+            {{form.submit(class="btn btn-primary")}}
+        </div>
+    </form>
+</div>
+{% endblock %}

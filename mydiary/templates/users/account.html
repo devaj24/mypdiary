@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" class="form-group" enctype="multipart/form-data">
+  {{form.csrf_token}}
+  <div class="container" style="margin: auto;width: 50%;">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ dp }}" alt={{user.dp}}
+        style="width: 20%; margin-bottom: 50px;margin-right: 3%;">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+    {{form.change_dp.label(class="form-control-label")}}
+    {% if form.change_dp.errors %}
+      form.change_dp(class="form-control is-invalid")
+      {% for error in form.change_password.errors %}
+        <span><small>{{error}}</small></span>
+      {% endfor %}
+      {% else %}
+        {{form.change_dp(class="form-control")}}
+    {% endif %}
+  </div><br>
+  <div class="container">
+    <h1>Change Paasword</h1>
+    <div>
+      {{form.old_password.label(class="form-control-label")}}
+      {% if form.old_password.errors %}
+      {{form.old_password(class="form-control is-invalid")}}
+      <div class="inavlid-feedback">
+        {% for error in form.old_password.errors %}
+        <span><small>{{error}}</small></span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{form.old_password(class="form-control")}}
+      {% endif %}
+    </div>
+    <div>
+      {{form.new_password.label(class="form-control-label")}}
+      {% if form.new_password.errors %}
+      {{form.new_password(class="form-control is-invalid")}}
+      <div class="inavlid-feedback">
+        {% for error in form.new_password.errors %}
+        <span><small>{{error}}</small></span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{form.new_password(class="form-control")}}
+      {% endif %}
+    </div>
+    <div>
+      {{form.confirm_password.label(class="form-control-label")}}
+      {% if form.confirm_password.errors %}
+      {{form.confirm_password(class="form-control is-invalid")}}
+      <div class="inavlid-feedback">
+        {% for error in form.confirm_password.errors %}
+        <span><small>{{error}}</small></span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{form.confirm_password(class="form-control")}}
+      {% endif %}
+    </div><br>
+    <div class="form-group">
+      {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+  </div>
+</form>
+<div class="container">
+  <a class="btn btn-danger" id="delete" href="{{url_for('users.delete_account')}}" onclick="return del();">Delete Account</a>
+</div><br>
+<script type="text/javascript">
+  function del(){
+    q = confirm('Are you sure to delete your account?')
+    return q
+  }
+</script>
+
+{% endblock %}

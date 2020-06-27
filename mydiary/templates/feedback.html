@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="margin-bottom: 350px;">
+    <h2>Write your Feedback and recommendations</h2>
+    <form method="POST" class="form-group">
+        <label class="form-control-label">Rate us</label>
+        <input name="rating" class="form-control" type="number" min=0, max=5 step=0.1><br>
+        <label class='form-control-label'>Write Here</label>
+        <textarea name="feedback" class="form-control"></textarea><br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+</div>
+{% endblock %}

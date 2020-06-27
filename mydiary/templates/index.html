@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block head %}
+<style>
+     @font-face {
+        font-family: piedra;
+        src: url(../static/Piedra-Regular.ttf);
+    }
+    body{
+        font-family: piedra;
+    }
+    img{
+        height: 85%;
+    }
+    .carousel-caption {
+        top: 10%;
+        bottom: auto;
+    }
+
+    .carousel-inner .item{
+    height: 100%;
+    }
+
+    .carousel-inner .item img {
+        width: 100%;
+        height: 100% !important;
+        object-fit: cover;
+    }   
+
+</style>
+{% endblock %}
+{% block content %}
+{% if 'logged_in' not in session %}
+    <div class="carousel slide" >
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{{url_for('static', filename='images/main1.jpg')}}">
+            </div>
+            <div class="carousel-caption" style="padding-bottom:50%;">
+                <h1 style="color: rgb(0, 0, 0); font-family:piedra; font-size: 50px;">Your Own Personal Diary</h1>
+                <p style="color: rgb(0, 0, 0); font-size: 30px;">Write Something Everyday</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="conatainer card" style="border-bottom: 0; margin-top: 10px; border-top: 10px;">
+        <div class="card-body" style="margin:auto;width:50%; padding:20px;">
+            <h3>Write AnyTime AnyWhere</h3>
+            <p style="font-family: piedra;">
+                Whether you are on a PC, Laptop, Table or Mobile Device, take Your
+                diary with you 
+            </p>
+            <a class="btn btn-primary" href="{{url_for('users.register')}}"><h6>Get Started</h6></a>
+        </div>
+    </div>
+
+    <div class="conatainer">
+        <img src="{{url_for('static', filename='images/main2.jpg')}}">
+    </div>
+{% else %}
+    <div style="margin:auto;width:50%; padding:20px;margin:100px">
+        <h2>Hi {{session['username']}}!</h2>
+        <h3>How's your Day</h3>
+        <h4>Record your Day</h4>
+        <a class="btn btn-primary" href="{{url_for('pages.new_page')}}">Write Diary</a>
+    </div>
+    <h1 style="width: 50%; margin:auto;"><strong><i>Your Recent Pages</i></strong></h1><br>
+    {% for page in user.pages %}
+        <div class="card" style="margin: auto; width: 50%;">
+            <div class="card-body">
+                <p><a href="{{url_for('pages.detailed_view', diary_page_no=page.id)}}">{{page.title}}<a></a></p>
+                <p>{{page.author.username}}</p>
+                <small>{{page.date_posted.strftime('%Y-%m-%d')}}</small>
+                <p>{{page.notes|truncate(200)}}<p>
+                <a style="color: red;" href="{{url_for('pages.delete_page', page_no=page.id)}}">Delete</a>
+                <a href="{{url_for('pages.edit_page', page_no=page.id)}}">Edit</a>
+            </div>
+        </div><br>
+    {% endfor %}
+{% endif %}
+{% endblock %}

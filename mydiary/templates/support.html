@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="margin-bottom: 350px;">
+    <h2>Thanks for showing the willingness to support us</h2>
+    <p>We don't have this functionality now</p>
+    <form method="POST">
+        <label>Do you wanted to be notified when functionality is available</label>
+        <fieldset>
+            <legend>Radio Selection</legend>
+            <label><input type="radio" name="options" value="True">YES</label>
+            <label><input type="radio" name="options" value="False">NO</label>
+        </fieldset><br>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}

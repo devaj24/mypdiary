@@ -1,0 +1,77 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+	{% block head %}{% endblock %}
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md navbar-light bg-light">
+		<a class="navbar-brand" href="{{url_for('main.home')}}"><strong style="color:#3399ff;"><i>mydiary</i></strong></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-md-end" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				{% if 'logged_in' in session %}
+				<a class="nav-item nav-link active" href="{{url_for('users.account')}}"> Account <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" href="{{url_for('main.support')}}"> Support <span class="sr-only"></span></a>
+				<a class="nav-item nav-link" href="{{url_for('main.about')}}"> About <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" href="{{url_for('pages.new_page')}}">Write</a>
+				<a class="nav-item nav-link" href="{{url_for('users.logout')}}">LogOut</a>
+				<a class="nav-item nav-link" href="{{url_for('main.feedback')}}">FeedBack</a>
+				{% else %}
+				<a class="nav-item nav-link" style="font-size:20px;" href="{{url_for('users.register')}}">Register</a>
+				<a class="nav-item nav-link" style="font-size:20px;" href="{{url_for('users.login')}}">Login</a>
+				<a class="nav-item nav-link " href="{{url_for('main.support')}}"> Support <span class="sr-only"></span></a>
+				<a class="nav-item nav-link" href="{{url_for('main.about')}}"> About <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" href="{{url_for('main.feedback')}}">FeedBack</a>
+				{% endif %}
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="alert alert-{{category}} alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						{{message}}
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+	</div>
+	{% block content %}
+	{% endblock %}
+	<!-- Footer -->
+	<footer class="page-footer font-small blue pt-4" style="background-color: black; color: white;">
+		<div class="container-fluid text-center text-md-left">
+			<div class="row">
+				<div class="col-md-6 mt-md-0 mt-3">
+					<h5 class="text-uppercase">Links</h5>
+					<ul>
+						<li>
+							<a style="text-decoration: none;" href="{{url_for('main.home')}}">Home</a>
+						</li>
+						<li>
+							<a style="text-decoration: none;" href="{{url_for('main.about')}}">About</a>
+						</li>
+						<li>
+							<a style="text-decoration: none;" href="{{url_for('users.register')}}">Register</a>
+						</li>
+					</ul>
+				</div>
+				<hr class="clearfix w-100 d-md-none pb-3">
+			</div>
+		</div>
+	</footer>
+
+	<script src="{{url_for('static', filename='js/jquery.js')}}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{url_for('static', filename='js/bootstrap.min.js')}}" type="text/javascript" charset="utf-8"></script>
+</body>

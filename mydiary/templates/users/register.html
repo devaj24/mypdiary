@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Register</h1>
+    <form method="POST" class="form-group" enctype="multipart/form-data">
+        {{form.csrf_token}}
+        <div>
+            {{form.email.label(class="form-control-label")}}
+            {% if form.email.errors %}
+                {{form.email(class="form-control is-invalid")}}
+            <div class="inavlid-feedback">
+                {% for error in form.email.errors %}
+                    <span><small>{{error}}</small></span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{form.email(class="form-control")}}
+            {% endif %}
+        </div>
+        <div>
+            {{form.username.label(class="form-control-label")}}
+            {% if form.username.errors %}
+                {{form.username(class="form-control is-invalid")}}
+            <div class="inavlid-feedback">
+                {% for error in form.username.errors %}
+                    <span><small>{{error}}</small></span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{form.username(class="form-control")}}
+            {% endif %}
+        </div>
+        <div>
+            {{form.password.label(class="form-control-label")}}
+            {% if form.password.errors %}
+                {{form.password(class="form-control is-invalid")}}
+            <div class="inavlid-feedback">
+                {% for error in form.password.errors %}
+                    <span><small>{{error}}</small></span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{form.password(class="form-control")}}
+            {% endif %}
+        </div>
+        <div>
+            {{form.c_password.label(class="form-control-label")}}
+            {% if form.c_password.errors %}
+                {{form.c_password(class="form-control is-invalid")}}
+            <div class="inavlid-feedback">
+                {% for error in form.c_password.errors %}
+                    <span><small>{{error}}</small></span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{form.c_password(class="form-control")}}
+            {% endif %}
+        </div>
+        <div>
+            {{form.dp.label(class="form-control-label")}}
+            {% if form.dp.errors %}
+                {{form.dp(class="form-control is-invalid")}}
+            <div class="inavlid-feedback">
+                {% for error in form.dp.errors %}
+                    <span><small>{{error}}</small></span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{form.dp(class="form-control")}}
+            {% endif %}
+        </div><br>
+        <div class="form-group">
+            {{ form.register(class="btn btn-outline-info") }}
+        </div>
+        <small>Already Have an Account? <a href="{{url_for('users.login')}}">Login</a></small>
+    </form>
+</div>
+{% endblock %}
