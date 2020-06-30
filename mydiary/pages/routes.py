@@ -44,11 +44,11 @@ def new_page():
 @login_required
 def detailed_view(diary_page_no):
     page = Page.query.get_or_404(diary_page_no)
+    image = page.image
+    if image != None:
+        image = url_for('static', filename=f'images/{image}')
 
-    if page.image != None:
-        image = url_for('static', filename=f'images/{page.image}')
-
-    return render_template('pages/detailed_view.html', page=page, image=image, video=video)
+    return render_template('pages/detailed_view.html', page=page, image=image)
 
 @pages.route('/delete_page/<page_no>')
 def delete_page(page_no):
@@ -68,7 +68,6 @@ def edit_page(page_no):
         title = form.title.data
         notes = form.notes.data
         image = form.image.data
-        video = form.video.data
 
         if image != None:
             img_name = secure_filename(image.filename)

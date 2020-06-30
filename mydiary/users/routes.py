@@ -115,16 +115,19 @@ def account():
 		else:
 			dp_filename = user.dp
 
-		if old_password != None:
-			if new_password != None:
+		if old_password != '':
+			if new_password != '':
 				if old_password == user.password:
-					print('came here')
-					if confirm_password != None:
-						if new_password == confirm_password:
-								user.password = new_password
+					if confirm_password != '':
+						if len(new_password) >= 6: 
+							if new_password == confirm_password:
+									user.password = new_password
+							else:
+								flash('Confirm Password does not match new password', 'warning')
+								return redirect(url_for('users.register'))
 						else:
-							flash('Confirm Password does not match new password', 'warning')
-							return redirect(url_for('users.register'))
+							flash('Password Must be atleast 6 characters long.', 'danger')
+							return redirect(url_for('users.account'))
 					else:
 						flash('Please Confirm Your Password', 'warning')
 						return redirect(url_for('users.account'))
