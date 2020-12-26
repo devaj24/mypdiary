@@ -1,5 +1,5 @@
 # mypdiary
-This is a simple flask website where you can sign up/login and write something just as you do in your diary si the name pdiary.
+This is a simple flask website where you can sign up/login and write something just as you do in your diary so the name pdiary.
 
 Live Running code at https://www.mypdiary.herokuapp.com
 
